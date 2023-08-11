@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'coontenido' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div style="margin: 10%;">
+    <div className="d-flex">
+        <div>
+<h1 style="font-weight:bold; font-size:4vmin">Registro Universidades</h1>
+
+<a href="crear_uni" id="open-modal" style="text-decoration: none; box-shadow: 0px 7px 16px -7px hsl(118, 52%, 25%);"> Agregar Universidad</a>
+
+<br>
+<br>
+
+<table class="mi-tabla">
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/pdfmake.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/vfs_fonts.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  
+  <script src="{% static 'js/uni.js' %}"></script>
+  <button class="AddButtonv3" onclick="exportToCSV()">
+    <i class="fa fa-file-o"></i>&nbsp;&nbsp;CSV
+  </button>
+  <button class="AddButtonv3" onclick="exportToExcel()">
+    <i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;EXCEL
+  </button>
+  <button class="AddButtonv3" id="btnCrearPDF"">
+    <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF
+  </button>
+
+
+    <thead>
+        <tr>
+            <th>Estado</th>
+            <th>Universidad</th>
+            <th style="padding: 3.5px 30px;">Clave</th>
+            <th>Camiones</th>
+            <th>Vans</th>
+            <th>Carros</th>
+            <th style="padding: 3.5px 30px;">Hotel</th>
+            <th>Requerimientos</th>
+            <th>Guias</th>
+            <th>Fotografia</th>
+            <th style="padding: 3.5px 30px;">Carta Protesta</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for uni in unis  %}
+        <tr>
+            <td>{{ uni.estado}}</td>
+            <td>{{ uni.universidad}}</td>
+            <td>{{ uni.clave}}</td>
+            <td>{{ uni.camiones }}</td>
+            <td>{{ uni.vans }}</td>
+            <td>{{ uni.carros }}</td>
+            <td>{{ uni.hotel }}</td>
+            <td>{{ uni.requerimientos }}</td>
+            <td>{{ uni.guias }}</td>
+            <td>
+              {% if uni.fotografia %}
+                <a href="{{ uni.fotografia.url }}">
+                  <i class="fas fa-image"></i>
+                </a>
+              {% else %}
+                No imagen disponible
+              {% endif %}
+            </td>
+            
+            <td>
+              {% if uni.carta_protes %}
+                <a href="{{ uni.carta_protes.url }}">
+                  <i class="fas fa-file"></i>
+                </a>
+              {% else %}
+                Archivo no disponible
+              {% endif %}
+            </td>
+            <td><a href="{% url 'editar_uni' uni.uniId %}"
+              class="edit-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Editar</a> <a
+              href="{% url 'eliminar_uni' uni.uniId %}"
+              class="delete-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Eliminar</a></td>
+            
+            
+           
+            
+        </tr>
+        {% endfor %}
+        {% endblock %}

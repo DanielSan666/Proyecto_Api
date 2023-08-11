@@ -1,0 +1,93 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ENDCUT DURANGO 2024 {% block titulo %}{% endblock  %}</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
+        <link rel="icon" href="{% static 'img/logo_chico.png' %}">
+    </head>
+    <body>
+
+        <div class="header"><h2 style="margin-left: 5%;margin-top: 1%; color: #fff">Enero - Abril 2024</h2></div>
+        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+        <div class="spinner diagonal part-1"></div>
+        <div class="spinner horizontal"></div>
+        <div class="spinner diagonal part-2"></div>
+    </label>
+    <style>
+       #sidebarMenu {
+        height: 100%; /* Ajusta la altura como desees o utiliza max-height */
+        display: flex;
+        flex-direction: column;
+        max-height: 90vh; /* Establece una altura máxima del 80% del viewport height */
+        overflow-y: auto;
+        }
+        #sidebarMenu .sidebarMenuInner li {
+        padding: 13.9px;
+        }
+        .sidebarMenuInner {
+        flex-grow: 1;
+        overflow-y: auto;
+        }
+        /* Ajusta la altura máxima del menú en función del tamaño de la ventana */
+        @media screen and (max-height: 600px) {
+        #sidebarMenu {
+            max-height: 350px; /* Ajusta esta altura para pantallas más pequeñas */
+        }
+        }
+    </style>
+    <div id="sidebarMenu">
+        <ul class="sidebarMenuInner" style="overflow-y: auto;">
+            <li>
+                <img src="{% static 'img/logo_normal.jpg' %}" width="90%" style="margin: 10px 0px 10px;">
+                <br>
+            </li>
+            <li><i class="fas fa-home"></i><a href="{%url 'home' %}"> Inicio</a></li>
+            <li><i class="fas fa-users"></i> <a href="{% url 'index' %}" > Participantes</a></li>
+            <li><i class="fas fa-user-tie"></i> <a href="{% url 'entrenadores' %}"> Entrenadores</a></li>
+            <li><i class="fas fa-university"></i> <a href="{% url 'universidades' %}"> Universidades</a></li>
+            <li><i class="fas fa-handshake"></i> <a href="{% url 'coordinadores' %}"> Coordinadores</a></li>
+            <li><i class="fas fa-hand-holding-medical"></i> <a href="{% url 'asistentes' %}"> Asistentes</a></li>
+            <li><i class="fas fa-heart"></i> <a href="{% url 'medicos' %}"> Medicos</a></li>
+            <li><i class="fas fa-shield-alt"></i><a href="{% url 'staff' %}"> Staff</a></li>
+            <li><i class="fas fa-user-plus"></i> <a href="{% url 'registro' %}"> Registro</a></li>
+            <li><i class="fas fa-share"></i> <a href="{% url 'salir' %}" > Cerrar Sesion</a></li>
+        </ul>
+    </div>
+    <div id='center' class="main center">
+        
+        {% block 'coontenido' %}
+                {% endblock %}
+            </tbody>
+        </table>
+    
+        {% if partis.has_other_pages %}
+        <ul class="pagination">
+            {% if partis.has_previous %}
+                <li><a href="?page={{ partis.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disable"><span>&laquo;</span></li>
+            {% endif %}
+
+            {% for i in partis.page_range %}
+                {% if partis.number == i %}
+                    <li class="active"><span>{{ i }}<span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if partis.has_next %}
+                <li><a href="?page={{ partis.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disable"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

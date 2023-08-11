@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'coontenido' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<div style="margin: 10%;">
+    <div className="d-flex">
+        <div>
+<h1 style="font-weight:bold; font-size:4vmin">Registro Staff</h1>
+
+<a href="crear_staff" id="open-modal" style="text-decoration: none; box-shadow: 0px 7px 16px -7px hsl(118, 52%, 25%);"> Agregar Staff</a>
+
+<br>
+<br>
+
+<table class="mi-tabla">
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/pdfmake.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/vfs_fonts.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  
+  <script src="{% static 'js/staff.js' %}"></script>
+  <button class="AddButtonv3" onclick="exportToCSV()">
+    <i class="fa fa-file-o"></i>&nbsp;&nbsp;CSV
+  </button>
+  <button class="AddButtonv3" onclick="exportToExcel()">
+    <i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;EXCEL
+  </button>
+  <button class="AddButtonv3" id="btnCrearPDF">
+    <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF
+  </button>
+
+
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th style="padding: 3.5px 60px;">Apellido paterno</th>
+            <th style="padding: 3.5px 60px;">Apellido materno</th>
+            <th style="padding: 3.5px 60px;">No. Celular</th>
+            <th>Fotografia</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sta in staf %}
+        <tr>
+            <td>{{ sta.nombre}}</td>
+            <td>{{ sta.ape_patern}}</td>
+            <td>{{ sta.ape_mater}}</td>
+            <td>{{ sta.celular }}</td>
+            <td>
+              {% if sta.fotografia %}
+                <a href="{{ sta.fotografia.url }}">
+                  <i class="fas fa-image"></i>
+                </a>
+              {% else %}
+                No imagen disponible
+              {% endif %}
+            </td>
+        </td>
+        <td><a href="{% url 'editar_staff' sta.StId %}"
+            class="edit-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Editar</a> <a
+            href="{% url 'eliminar_staff' sta.StId %}"
+            class="delete-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+        {% endblock %}

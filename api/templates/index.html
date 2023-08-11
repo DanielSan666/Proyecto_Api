@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'coontenido' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div style="margin: 10%;">
+    <div className="d-flex">
+        <div>
+<h1 style="font-weight:bold; font-size:4vmin;">Registro Participantes</h1>
+
+<a href="crear_parti" id="open-modal" style="text-decoration: none; box-shadow: 0px 7px 16px -7px hsl(118, 52%, 25%);"> Agregar registro de Participantes</a>
+
+<br>
+<br>
+<style>
+  .mi-tabla {
+      font-size: 11px; /* Tamaño de fuente más pequeño */
+      width: 60%; /* Ancho de la tabla reducido al 80% */
+  }
+
+  .mi-tabla td, .mi-tabla th {
+      padding: 6px; /* Espacio interno más pequeño */
+  }
+</style>
+
+
+<table class="mi-tabla" style="overflow-x: auto;">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/pdfmake.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/vfs_fonts.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  
+  <script src="{% static 'js/parti.js' %}"></script>
+  <button class="AddButtonv3" onclick="exportToCSV()">
+    <i class="fa fa-file-o"></i>&nbsp;&nbsp;CSV
+  </button>
+  <button class="AddButtonv3" onclick="exportToExcel()">
+    <i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;EXCEL
+  </button>
+  <button class="AddButtonv3" id="btnCrearPDF">
+    <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF
+  </button>
+
+  <a href="importar" id="open-modal" style="text-decoration: none; box-shadow: 0px 7px 16px -7px #20601e; margin-left:5px"> Carga Masiva </a>
+
+    <thead>
+        <tr>
+            <th> Matricula </th>
+            <th> Universidad </th>
+            <th> Nombre </th>
+            <th> Apellido Paterno</th>
+            <th> Apellido Materno </th>
+            <th> Grado </th>
+            <th> Carrera </th>
+            <th> Curp </th>
+            <th> Disciplina </th>
+            <th> Rama </th>
+            <th style="padding: 3.5px 30px;"> Fecha de Ingreso </th>
+            <th> Ciclo Escolar </th>
+            <th> Sexo </th>
+            <th> NSS </th>
+            <th> Opciones </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for parti in partis %}
+        <tr>
+            <td>{{ parti.matricula}}</td>
+            <td>{{ parti.universidad}}</td>
+            <td>{{ parti.nombre}}</td>
+            <td>{{ parti.ape_patern}}</td>
+            <td>{{ parti.ape_mater}}</td>
+            <td>{{ parti.grado }}</td>
+            <td>{{ parti.carrera }}</td>
+            <td>{{ parti.curp }}</td>
+            <td>{{ parti.disciplina }}</td>
+            <td>{{ parti.rama }}</td>
+            <td>{{ parti.FechaIngre }}</td>
+            <td>{{ parti.cicloescolar }}</td>
+            <td>{{ parti.sexo }}</td>
+            <td>{{ parti.nss }}</td>
+            <td><a href="{% url 'editar_parti' parti.PartiId %}"
+                    class="edit-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Editar</a>
+                    <a  href="{% url 'eliminar_parti' parti.PartiId %}"
+                    class="delete-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Eliminar</a></td>
+        {% endfor %}
+        {% endblock %}

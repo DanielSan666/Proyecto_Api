@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'coontenido' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div style="margin: 10%;">
+    <div className="d-flex">
+        <div>
+<h1 style="font-weight:bold; font-size:4vmin">Registro Coordinadores</h1>
+
+<a href="crear_coordi" id="open-modal" style="text-decoration: none; box-shadow: 0px 7px 16px -7px hsl(118, 52%, 25%);"> Agregar Coordinador</a>
+
+<br>
+<br>
+
+<table class="mi-tabla">
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/pdfmake.min.js"></script>
+  <script src="https://unpkg.com/pdfmake/build/vfs_fonts.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  
+  <script src="{% static 'js/coordi.js' %}"></script>
+  <button class="AddButtonv3" onclick="exportToCSV()">
+    <i class="fa fa-file-o"></i>&nbsp;&nbsp;CSV
+  </button>
+  <button class="AddButtonv3" onclick="exportToExcel()">
+    <i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;EXCEL
+  </button>
+  <button class="AddButtonv3" id="btnCrearPDF"">
+    <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF
+  </button>
+
+  <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>Telefono oficina</th>
+        <th>Numero de Celular</th>
+        <th>Correo Electronico</th>
+        <th>Nombre del Suplente</th>
+        <th>Numero de Celular del suplente</th>
+        <th>Fotografias</th>
+        <th>Opciones</th>
+    </tr>
+</thead>
+<tbody>
+    {% for coordi in coordis %} 
+    <tr>
+        <td>{{ coordi.Nombre }}</td>
+        <td>{{ coordi.Ape_Pate }}</td>
+        <td>{{ coordi.Ape_Mate }}</td>
+        <td>{{ coordi.telefono_ofic }}</td>
+        <td>{{ coordi.celular }}</td>
+        <td>{{ coordi.email }}</td>
+        <td>{{ coordi.nom_suple }}</td>
+        <td>{{ coordi.cel_suple }}</td>
+        <td>
+            {% if coordi.fotografia %}
+            <a href="{{ coordi.fotografia.url }}">
+                <i class="fas fa-image"></i>
+              </a>
+            {% else %}
+              No imagen disponible
+            {% endif %}
+          </td>
+          <td><a href="{% url 'editar_coordi' coordi.corId %}"
+            class="edit-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Editar</a> <a
+            href="{% url 'eliminar_coordi' coordi.corId %}"
+            class="delete-button" style="text-decoration: none; margin-bottom:2vmin; margin:5px;">Eliminar</a></td>
+         
+    </tr>
+    {% endfor %}
+        {% endblock %}

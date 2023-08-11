@@ -1,0 +1,100 @@
+
+
+{% block content %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        .contenedor {
+            padding: 60px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.712);
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 5.5px );
+            -webkit-backdrop-filter: blur( 5.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+
+        .hijo {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        button[type="submit"],
+        .btn-primary {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        h1{
+            font-size: 3vmax;
+            font-family: 'Signika Negative', sans-serif;
+        }
+        label, button, a, input{
+            font-family: 'Signika Negative', sans-serif;
+        }
+        .btn-primary {
+            background-color: #dc3545;
+        }
+
+        @media screen and (max-width: 600px) {
+            .contenedor {
+                padding: 30px;
+            }
+            h1{
+                font-size: 4vmax;
+            }
+        }
+  </style>
+  <div class="contenedor">
+    <div class="hijo">
+      <h1>Importar Registros desde Excel</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Importar</button><a href="{% url 'index' %}" class="btn btn-primary">Regresar</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}
