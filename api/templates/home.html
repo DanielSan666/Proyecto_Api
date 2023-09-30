@@ -1,120 +1,126 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block 'coontenido' %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
 
-{% block 'coontenido' %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<div style="margin: 10%">
+  <div className="d-flex">
+    <div>
+      <div class="container">
+        {% if user.is_authenticated %}
+        <h1>Bienvenido, {{ user.username }}</h1>
+        {% else %}
+        <h1>Bienvenido a mi sitio web</h1>
 
-<div style="margin: 10%;">
-    <div className="d-flex">
-        <div>
-            <div class="container">
-                {% if user.is_authenticated %}
-                    <h1>Bienvenido, {{ user.username }}</h1>
-                {% else %}
-                    <h1>Bienvenido a mi sitio web</h1>
+        {% if messages %} {% for message in messages %}
+        <div class="notification{{message.tags}}">{{message}}</div>
+        {% endfor %} {% endif %} {% endif %}
 
-                    {% if messages %}
-                    {% for message in messages %}
-                        <div class="notification{{message.tags}}">
-                            {{message}}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endif %}
-
-                <!-- Enlace "Registro" con menú desplegable -->
-                <div class="enlace-registro">
-                    <div class="enlace-registro-contenido">
-                        <i class="fas fa-user" style="font-size: 1.2em;"></i>
-                        <br>
-                        <span style="font-size: 1.2em; font-weight: bold;">Registro</span>
-                        <br><span style="font-size: 0.7em;"> Registro de Participantes, entrenadores, asistentes </span>
-                        <div class="division-azul"></div>
-                        <button class="enlace-importante boton-ir-registro" onclick="toggleEnlacesImportantes()" style="background-color: #002278; color: #ffffff;" >
-                          Ir a Registro <i class="fas fa-arrow-right flecha-derecha"></i>
-                      </button>
-                      
-                    </div>
-                </div>
-                <br>
-                <br>
-                <div class="enlaces-importantes" id="registro-menu">
-                    <a href="{% url 'index' %}" class="enlace-importante">Registro de <br>Participantes</a>
-                    <a href="{% url 'entrenadores' %}" class="enlace-importante">Registro de <br>Entrenadores</a>
-                    <a href="{% url 'universidades' %}" class="enlace-importante">Registro de <br>Universidades</a>
-                    <!-- Agrega más enlaces importantes aquí -->
-                </div>
-            </div>
+        <!-- Enlace "Registro" con menú desplegable -->
+        <div class="enlace-registro">
+          <div class="enlace-registro-contenido">
+            <i class="fas fa-user" style="font-size: 1.2em"></i>
+            <br />
+            <span style="font-size: 1.2em; font-weight: bold">Registro</span>
+            <br /><span style="font-size: 0.7em">
+              Registro de Participantes, entrenadores, asistentes
+            </span>
+            <div class="division-azul"></div>
+            <button
+              class="enlace-importante boton-ir-registro"
+              onclick="toggleEnlacesImportantes()"
+              style="background-color: #002278; color: #ffffff"
+            >
+              Ir a Registro <i class="fas fa-arrow-right flecha-derecha"></i>
+            </button>
+          </div>
         </div>
+        <br />
+        <br />
+        <div class="enlaces-importantes" id="registro-menu">
+          <a href="{% url 'index' %}" class="enlace-importante"
+            >Registro de <br />Participantes</a
+          >
+          <a href="{% url 'entrenadores' %}" class="enlace-importante"
+            >Registro de <br />Entrenadores</a
+          >
+          <a href="{% url 'universidades' %}" class="enlace-importante"
+            >Registro de <br />Universidades</a
+          >
+          <!-- Agrega más enlaces importantes aquí -->
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <style>
-    .enlace-importante {
-        color: #ffffff;
-        background-color: #007bff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        display: inline-block;
-        text-decoration: none;
-        margin-right: 10px;
-        margin-bottom: 10px;
-    }
+  .enlace-importante {
+    color: #ffffff;
+    background-color: #007bff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 
-    .enlaces-importantes {
-        display: none; /* Inicialmente ocultamos el menú desplegable */
-    }
+  .enlaces-importantes {
+    display: none; /* Inicialmente ocultamos el menú desplegable */
+  }
 
-    .enlace-registro {
-      color: #ffffff;
-        background-color: #007bff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        display: inline-block;
-        text-decoration: none;
-        margin-right: 10px;
-        margin-bottom: 10px;
-    }
+  .enlace-registro {
+    color: #ffffff;
+    background-color: #007bff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 
-    .enlace-registro-contenido {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
+  .enlace-registro-contenido {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 
-    .enlace-registro .division-azul {
-        background-color: #0cdfff;
-        height: 8px;
-        margin-bottom: 15px;
-        width: 100%;
-    }
+  .enlace-registro .division-azul {
+    background-color: #0cdfff;
+    height: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
 
-    /* Estilo para la flecha de Font Awesome */
-    .enlace-registro .flecha-derecha {
-        margin-left: 5px;
-    }
+  /* Estilo para la flecha de Font Awesome */
+  .enlace-registro .flecha-derecha {
+    margin-left: 5px;
+  }
 
-    /* Estilo para el botón "Ir a Registro" */
-    .boton-ir-registro {
-        background-color: #007bff;
-        border: none;
-        padding: 10px 10px; /* Ajusta el valor para hacerlo cuadrado */
-        border-radius: 5px;
-        color: #ffffff;
-        cursor: pointer;
-        font-size: 0.7em;
-    }
+  /* Estilo para el botón "Ir a Registro" */
+  .boton-ir-registro {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 10px; /* Ajusta el valor para hacerlo cuadrado */
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.7em;
+  }
 </style>
 
 <script>
-    // Función para mostrar u ocultar el menú desplegable
-    function toggleEnlacesImportantes() {
-        var registroMenu = document.getElementById('registro-menu');
-        if (registroMenu.style.display === 'none') {
-            registroMenu.style.display = 'block';
-        } else {
-            registroMenu.style.display = 'none';
-        }
+  // Función para mostrar u ocultar el menú desplegable
+  function toggleEnlacesImportantes() {
+    var registroMenu = document.getElementById("registro-menu");
+    if (registroMenu.style.display === "none") {
+      registroMenu.style.display = "block";
+    } else {
+      registroMenu.style.display = "none";
     }
+  }
 </script>
 {% endblock %}
