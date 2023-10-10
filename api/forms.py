@@ -24,11 +24,6 @@ class PartiForm(forms.ModelForm):
                 'placeholder': 'Matricula',
                 'oninput': "this.value = this.value.toUpperCase()"
                 }),
-            'universidad': TextInput(attrs={
-                'class': "form-control",
-                'placeholder': 'Universidad',
-                'oninput': "this.value = this.value.toUpperCase()"
-                }),
             'nombre':TextInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Nombre',
@@ -108,7 +103,7 @@ class EnterForm(forms.ModelForm):
 
     class Meta:
         model = Entre
-        fields = ['nombre', 'ape_patern', 'ape_mater', 'telefono_ofic', 'celular', 'disciplina','rama', 'fotografia']
+        fields = ['nombre', 'ape_patern', 'ape_mater', 'telefono_ofic', 'celular','universidad', 'disciplina','rama', 'fotografia']
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -158,7 +153,7 @@ class UniForm(forms.ModelForm):
 class CoordiForm(forms.ModelForm):
     class Meta:
         model = Coordi
-        fields = ['Nombre', 'Ape_Pate', 'Ape_Mate', 'telefono_ofic', 'celular', 'email', 'nom_suple', 'cel_suple', 'fotografia']
+        fields = ['Nombre', 'Ape_Pate', 'Ape_Mate', 'telefono_ofic', 'celular','universidad', 'email', 'nom_suple', 'cel_suple', 'fotografia']
         widgets = {
             'Nombre': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -236,7 +231,7 @@ class UsuarioForm(forms.ModelForm):
 class AsisForm(forms.ModelForm):
     class Meta:
         model = Asis
-        fields = ['nombre', 'ape_patern', 'ape_mater', 'disciplina', 'fotografia']
+        fields = ['nombre', 'ape_patern', 'ape_mater','universidad', 'disciplina', 'fotografia']
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -269,7 +264,7 @@ class AsisForm(forms.ModelForm):
 class MedicForm(forms.ModelForm):
     class Meta:
         model = Medi
-        fields = ['nombre', 'ape_patern', 'ape_mater','cedula','email','celular', 'fotografia']
+        fields = ['nombre', 'ape_patern', 'ape_mater','universidad','cedula','email','celular', 'fotografia']
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -311,7 +306,7 @@ class MedicForm(forms.ModelForm):
 class StaffForm(forms.ModelForm):
      class Meta:
         model = Staff
-        fields = ['nombre', 'ape_patern', 'ape_mater', 'celular', 'fotografia']
+        fields = ['nombre', 'ape_patern', 'ape_mater','universidad', 'celular', 'fotografia']
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',

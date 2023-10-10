@@ -54,9 +54,12 @@
             <li><i class="fas fa-hand-holding-medical"></i> <a href="{% url 'asistentes' %}"> Asistentes</a></li>
             <li><i class="fas fa-heart"></i> <a href="{% url 'medicos' %}"> Medicos</a></li>
             <li><i class="fas fa-shield-alt"></i><a href="{% url 'staff' %}"> Staff</a></li>
+            {% if user.is_staff %}
             <li><i class="fas fa-user-plus"></i> <a href="{% url 'registro' %}"> Registro</a></li>
+            {% else %}
+            {% endif %}  
             <li><i class="fas fa-share"></i> <a href="{% url 'salir' %}" > Cerrar Sesion</a></li>
-        </ul>
+              </ul>
     </div>
     <div id='center' class="main center">
         
